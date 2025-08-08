@@ -1,4 +1,4 @@
-<!-- Save as index.html -->
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +7,16 @@
 </head>
 <body>
 
-  <h2>User Info Form</h2>
-  <form action="/submit" method="post" >
+  <h2>Enter User Info</h2>
+  <form action="/submit" method="post">
     <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+    <input type="text" name="name" required><br><br>
 
     <label for="mobile">Mobile:</label><br>
-    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required><br><br>
+    <input type="tel" name="mobile" pattern="[0-9]{10}" required><br><br>
 
     <label for="date">Date:</label><br>
-    <input type="date" id="date" name="date" required><br><br>
+    <input type="date" name="date" required><br><br>
 
     <input type="submit" value="Submit">
   </form>
