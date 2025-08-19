@@ -109,6 +109,31 @@ body{
     font-weight: 900;
     display: none;
 }
+ .messages {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.messages h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#messagesList {
+    list-style-type: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#messagesList li {
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
 </style>
 <body>
     <div class="container">
@@ -131,6 +156,12 @@ body{
                 <button type="submit">Submit</button>
             </div>
         </form>
+     
+<div class="messages">
+    <h3>Messages Received</h3>
+    <ul id="messagesList"></ul>
+</div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
@@ -190,8 +221,26 @@ const saveMessages = (name, emailid, msgContent) => {
 const getElementVal = (id) => {
   return document.getElementById(id).value;
 };
+// Fetch messages from Firebase and display them
+const fetchMessages = () => {
+  contactFormDB.on("value", function(snapshot) {
+    const messagesList = document.getElementById("messagesList");
+    messagesList.innerHTML = ""; // Clear previous
+
+    snapshot.forEach(function(childSnapshot) {
+      const data = childSnapshot.val();
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${data.name}</strong> (${data.emailid})<br/>${data.msgContent}`;
+      messagesList.appendChild(li);
+    });
+  });
+};
+
+// Call fetchMessages when page loads
+window.onload = fetchMessages;
 
     </script>
 </body>
 
 </html>
+
